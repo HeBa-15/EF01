@@ -21,6 +21,31 @@ namespace EF01.Context
         
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Employee>().ToTable("Employees", schema: "dbo");
+
+
+            modelBuilder.Entity<Employee>()
+                //.HasKey("SSN")
+                //.HasKey(e=>e.SSN)
+                //.HasKey(nameof(Employee.SSN))
+                
+                ;
+            modelBuilder.Entity<Employee>()
+                .Property(e => e.SSN)
+                .UseIdentityColumn(10,10);
+           
+            modelBuilder.Entity<Employee>()
+                .Property(e => e.Name)
+                .IsRequired()
+                .HasMaxLength(10)
+                .HasColumnType("varchar")
+                .HasDefaultValue("Ahmed")
+                ;
+            base.OnModelCreating(modelBuilder);
+        }
+
         public DbSet<Employee> Employee { get; set; }
         public DbSet<Department> Department { get; set; }
     }
