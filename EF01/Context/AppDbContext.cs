@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using EF01.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,13 @@ namespace EF01.Context
             var connectionString = "server=.;database =EFCoreDbGroup01;Trusted_Connection =true;";
             
             optionsBuilder.UseSqlServer(connectionString);
+            
+
+        
         
         }
+
+        public DbSet<Employee> Employee { get; set; }
+        public DbSet<Department> Department { get; set; }
     }
 }
